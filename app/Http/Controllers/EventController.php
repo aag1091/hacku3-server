@@ -1,6 +1,8 @@
 <?php namespace App\Http\Controllers;
 
 use App\Event;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Input;
 
 class EventController extends Controller {
 
@@ -31,10 +33,54 @@ class EventController extends Controller {
 	 */
 	public function index()
 	{
-    $evt = new Event;
-    $evt->name = "ODU Hackathon";
-    $evt->save();
-		return '<b>Event Added</b>';
+		return <<<EOL
+      <html>
+        <head>
+          <title>EventController Test</title>
+        </head>
+
+        <body>
+          <form method="post" action="/api/events/add">
+            <b>Title</b> <br />
+            <input type='text' name='title' /> <br />
+            <b>Description</b> <br />
+            <input type='text' name='description' /> <br />
+            <b>Location</b> <br />
+            <input type='text' name='location' /> <br />
+            <b>Limit</b> <br />
+            <input type='number' name='attendee_limit' /> <br />
+            <button type='submit'>Add Event</button>
+          </form>
+        </body>
+      </html>
+EOL;
 	}
 
+  public function addEvent()
+  {
+    $event = new Event();
+    $event->title = Input::get('title');
+    $event->description = Input::get('description');
+    $event->location = Input::get('location');
+    $event->time = new \DateTime();
+    $event->photo_path = '/tmp';
+    $event->attendee_limit = Input::get('attendee_limit');
+    $event->save();
+  }
+
+  public function listEvents()
+  {
+    $events = Event::all();
+    $jsonData = array();
+    foreach ($events as $event) {
+      array_push($jsonData, array(
+        'title' => $event->title,
+        'description' => $event->description,
+        'location' => $event->location,
+        'photo_path' => $event->photo_path,
+        'attendee_limit' => $event->attendee_limit,
+      ));
+    }
+    return response()->json($jsonData);
+  }
 }

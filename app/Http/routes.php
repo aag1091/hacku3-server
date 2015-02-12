@@ -21,3 +21,6 @@ Route::controllers([
 ]);
 
 Route::get('api/events', 'EventController@index');
+Route::post('api/events/add', 'EventController@addEvent');
+Route::get('api/events/list', 'EventController@listEvents');
+
