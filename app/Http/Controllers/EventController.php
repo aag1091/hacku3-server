@@ -47,7 +47,15 @@ class EventController extends Controller {
             <input type='text' name='description' /> <br />
             <b>Location</b> <br />
             <input type='text' name='location' /> <br />
-            <b>Limit</b> <br />
+            <b>Category</b> <br />
+            <select name='cagtegory_id'>
+              <option value='1'>Sports</option>
+              <option value='2'>Entertainment</option>
+              <option value='3'>Other</option>
+              <option value='4'>Greek</option>
+              <option value='5'>School</option>
+            </select> <br />
+            <b>Attendee Limit</b> <br />
             <input type='number' name='attendee_limit' /> <br />
             <button type='submit'>Add Event</button>
           </form>
@@ -70,7 +78,13 @@ EOL;
 
   public function listEvents()
   {
-    $events = Event::all();
+    $events = array();
+
+    if (Input::has('cat')) {
+      $events = Event::where('category_id', '=', Input::get('cat'))->get();
+    } else {
+      $events = Event::all();
+    }
     $jsonData = array();
     foreach ($events as $event) {
       array_push($jsonData, array(
@@ -79,6 +93,7 @@ EOL;
         'location' => $event->location,
         'photo_path' => $event->photo_path,
         'attendee_limit' => $event->attendee_limit,
+        'category_id' => $event->category_id
       ));
     }
     return response()->json($jsonData);

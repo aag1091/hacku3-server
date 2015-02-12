@@ -14,10 +14,12 @@ class CreateEventsTable extends Migration {
 	{
 		Schema::create('events', function(Blueprint $table)
 		{
+      $table->engine = 'InnoDB';
 			$table->increments('id');
       //$table->integer('user_id')->unsigned();
       //$table->foreign('user_id')->references('id')->on('users');
-			$table->string('title');
+      $table->unsignedInteger('category_id');
+ 			$table->string('title');
 			$table->string('description');
 			$table->string('location');
 			$table->dateTime('time');
