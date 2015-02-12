@@ -24,3 +24,5 @@ Route::get('api/events', 'EventController@index');
 Route::post('api/events/add', 'EventController@addEvent');
 Route::get('api/events/list', 'EventController@listEvents');
 
+Route::post('api/login', 'SessionController@login');
+Route::post('api/logout', 'SessionController@logout');
