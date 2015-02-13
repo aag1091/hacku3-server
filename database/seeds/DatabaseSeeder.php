@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('EventCategoriesSeeder');
     $this->call('UsersSeeder');
     $this->call('EventsSeeder');
+    $this->call('UniversitiesSeeder');
     $this->command->info('All Tables Seeded!');
 	}
 
@@ -75,7 +76,7 @@ class EventsSeeder extends Seeder {
   {
     DB::table('events')->truncate();
     Event::create(array(
-      'category_id' => 0,
+      'category_id' => 1,
       'title' => 'HackU3',
       'description' => 'University hackathon event hosted by Dominion Enterprises.',
       'location' => '150 Granby Street, Norfolk, VA 23510',
@@ -84,7 +85,7 @@ class EventsSeeder extends Seeder {
       'attendee_limit' => 60));
     
     Event::create(array(
-      'category_id' => 0,
+      'category_id' => 2,
       'title' => 'ODU Hackathon',
       'description' => 'Hackathon hosted by Old Dominion University.',
       'location' => '5115 Hampton Blvd, Norfolk, VA 23529',
@@ -93,7 +94,7 @@ class EventsSeeder extends Seeder {
       'attendee_limit' => 0));
 
     Event::create(array(
-      'category_id' => 0,
+      'category_id' => 3,
       'title' => 'Pickup Basketball Game',
       'description' => 'Fun pickup game in the student b-ball courts.',
       'location' => 'ODU Basketball Court',
@@ -103,4 +104,6 @@ class EventsSeeder extends Seeder {
   }
 }
 
-
+class UniversitiesSeeder extends Seeder {
+    DB::table('universities')->truncate();
+}

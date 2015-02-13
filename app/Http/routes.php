@@ -32,5 +32,8 @@ Route::group(['namespace' => 'Api'], function()
   Route::post('api/login', 'SessionController@login');
   Route::post('api/logout', 'SessionController@logout');
 
+  Route::put('api/register', 'UserAccountController@register');
+  Route::post('api/update', 'UserAccountController@update');
+
 });
 
