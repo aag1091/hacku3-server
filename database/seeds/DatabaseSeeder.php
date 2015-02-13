@@ -47,25 +47,31 @@ class UsersSeeder extends Seeder {
     User::create(array(
       'name' => 'Quentin Headen',
       'email' => 'qheaden@cs.odu.edu',
+      'password_confirmation' => 'password',
       'password' => 'password'));
 
     User::create(array(
       'name' => 'Avinash Gosavi',
       'email' => 'agosavi@cs.odu.edu',
+      'password_confirmation' => 'password',
       'password' => 'password'));
+    
     User::create(array(
       'name' => 'Alex Dohrn',
       'email' => 'adohrn@cs.odu.edu',
+      'password_confirmation' => 'password',
       'password' => 'password'));
 
     User::create(array(
       'name' => 'Raghav Cheedalla',
       'email' => 'rcheedal@cs.odu.edu',
+      'password_confirmation' => 'password',
       'password' => 'password'));
 
     User::create(array(
       'name' => 'Bharath Kongara',
       'email' => 'bkongara@cs.odu.edu',
+      'password_confirmation' => 'password',
       'password' => 'password'));
   }
 }

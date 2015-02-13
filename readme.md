@@ -81,3 +81,14 @@ The following URLs can be used by 3rd party apps to access the data.
         * Data Type: Integer
         * Required: Yes
 * Returns: Success status
+
+**/api/event/{id}/attendees**
+* Request Method: GET
+* Parameters:
+    * id:
+        * Data Type: Integer
+        * Required: Yes
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
+* Returns: Success status
