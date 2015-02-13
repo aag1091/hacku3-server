@@ -74,4 +74,10 @@ The following URLs can be used by 3rd party apps to access the data.
         * Required: Yes
 * Returns: Success status
     
-
+**/api/user/events**
+* Request Method: GET
+* Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
+* Returns: Success status

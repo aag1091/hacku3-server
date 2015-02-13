@@ -35,6 +35,7 @@ Route::group(['namespace' => 'Api'], function()
 
   Route::put('api/register', 'UserAccountController@register');
   Route::post('api/update', 'UserAccountController@update');
+  Route::get('api/user/events', 'UserAccountController@events');
 
 });
 
