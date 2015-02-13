@@ -84,7 +84,7 @@ EOL;
     if (Input::has('cat')) {
       $events = Event::where('category_id', '=', Input::get('cat'))->get();
     } else {
-      $events = Event::all();
+      $events = Event::take(5)->get();
     }
     $jsonData = array();
     $eventList = array();
