@@ -87,8 +87,9 @@ EOL;
       $events = Event::all();
     }
     $jsonData = array();
+    $eventList = array();
     foreach ($events as $event) {
-      array_push($jsonData, array(
+      array_push($eventList, array(
 	'id' => $event->id,      
 	'title' => $event->title,
         'description' => $event->description,
@@ -98,6 +99,7 @@ EOL;
         'category_id' => $event->category_id
       ));
     }
+    $jsonData = array("success" => True, "events" => $eventList);
     return response()->json($jsonData);
   }
 }
