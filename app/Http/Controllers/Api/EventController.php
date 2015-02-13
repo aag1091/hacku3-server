@@ -82,6 +82,7 @@ EOL;
   {
     $events = array();
 
+    // Meow.
     if (Input::has('cat')) {
       $events = Event::where('category_id', '=', Input::get('cat'))->get();
     } else {
