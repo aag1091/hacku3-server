@@ -126,4 +126,19 @@ EOL;
     $jsonData = array('success' => True, 'name' => $user->name);
     return response()->json($jsonData);
   }
+
+  public function unjoinEvent($id)
+  {
+    if (!Input::has('user_id'))
+      return response()->json(array('success' => False));
+
+    $user = User::find(Input::get('user_id'));
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    Attendee::where('user_id', '=', $user->id)->
+              where('event_id', '=', $id)->delete();
+
+    return response()->json(array('success' => True));
+  }
 }
