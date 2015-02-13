@@ -92,6 +92,7 @@ EOL;
       array_push($eventList, array(
 	'id' => $event->id,      
 	'title' => $event->title,
+	'time' => $event->time,
         'description' => $event->description,
         'location' => $event->location,
         'photo_path' => $event->photo_path,
