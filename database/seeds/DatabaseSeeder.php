@@ -4,6 +4,7 @@
 use App\EventCategory;
 use App\User;
 use App\Event;
+use App\Cred;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder {
     $this->call('UsersSeeder');
     $this->call('EventsSeeder');
     $this->call('UniversitiesSeeder');
+    $this->call('CredSeeder');
     $this->command->info('All Tables Seeded!');
 	}
 
@@ -112,5 +114,33 @@ class UniversitiesSeeder extends Seeder {
   public function run()
   {
     DB::table('universities')->truncate();
+  }
+}
+
+class CredSeeder extends Seeder {
+
+  public function run()
+  {
+    DB::table('cred')->truncate();
+    // Give seeded cred to the seeded users for their
+    // created events. This is simulating what the
+    // event controller would add on an event creation.
+    Cred::create(array(
+      'user_id' => 1,
+      'event_id' => 1,
+      'cred' => 5
+    ));
+
+    Cred::create(array(
+      'user_id' => 2,
+      'event_id' => '2',
+      'cred' => 5
+    ));
+
+    Cred::create(array(
+      'user_id' => 3,
+      'event_id' => 3,
+      'cred' => 5
+    ));
   }
 }
