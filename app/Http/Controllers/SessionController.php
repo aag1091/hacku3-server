@@ -12,7 +12,7 @@ class SessionController extends Controller {
 	{
     		$email = Input::get('email');
     		$password = Input::get('password');	
-		$success = False;
+		$success = "False";
 		$user = new User();
 		
 		if(Auth::attempt(['email' => $email, 'password' => $password])){

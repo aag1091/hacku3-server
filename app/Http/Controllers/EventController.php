@@ -48,7 +48,7 @@ class EventController extends Controller {
             <b>Location</b> <br />
             <input type='text' name='location' /> <br />
             <b>Category</b> <br />
-            <select name='cagtegory_id'>
+            <select name='category_id'>
               <option value='1'>Sports</option>
               <option value='2'>Entertainment</option>
               <option value='3'>Other</option>
@@ -70,6 +70,7 @@ EOL;
     $event->title = Input::get('title');
     $event->description = Input::get('description');
     $event->location = Input::get('location');
+    $event->category_id = Input::get('category_id');
     $event->time = new \DateTime();
     $event->photo_path = '/tmp';
     $event->attendee_limit = Input::get('attendee_limit');
