@@ -84,6 +84,13 @@ EOL;
   {
     $events = array();
 
+    if (!Input::has('user_id'))
+      return response()->json(array('success' => False));
+
+    $user = User::find(Input::get('user_id'));
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
     // Meow.
     if (Input::has('cat')) {
       $events = Event::where('category_id', '=', Input::get('cat'))->get();
@@ -94,10 +101,14 @@ EOL;
     $eventList = array();
     foreach($events as $event) {
       // Get all event information as an array, and augment that
-      // array with the number of registered attendees.
+      // array with the number of registered attendees, and if
+      // the current user is an attendee.
       $eventArray = $event->toarray();
       $eventArray['attendee_count'] =
         Attendee::where('event_id', '=', $event->id)->count();
+      $eventArray['joined'] =
+        Attendee::where('event_id', '=', $event->id)->
+                  where('user_id', '=', $user->id)->count() > 0;
 
       array_push($eventList, $eventArray);
     }

@@ -5,6 +5,9 @@ The following URLs can be used by 3rd party apps to access the data.
 **/api/event/list**
 * Request Method: GET 
 * Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
     * cat:
         * Data Type: Integer
         * Required: No
@@ -23,6 +26,9 @@ The following URLs can be used by 3rd party apps to access the data.
 **/api/event/add**
 * Request Method: POST
 * Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
     * title:
         * Data Type: String
         * Required: Yes
