@@ -50,6 +50,14 @@ The following URLs can be used by 3rd party apps to access the data.
         * Extra Note: When set to 0, it means there is no limit on attendees.
 * Returns: Success status
 
+**/api/event/remove/{id}**
+* Request Method: DELETE
+* Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
+* Returns: Success status
+
 **/api/event/join/{id}**
 * Request Method: POST
 * Parameters:

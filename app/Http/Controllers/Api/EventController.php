@@ -80,6 +80,28 @@ EOL;
     $event->save();
   }
 
+  public function removeEvent($id)
+  {
+    if (!Input::has('user_id'))
+      return response()->json(array('success' => False));
+
+    $user = User::find(Input::get('user_id'));
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    $event = Event::find($id);
+    if ($event == NULL)
+      return response()->json(array('success' => False));
+
+    // Only delete an event if the user actually owns it.
+    if ($event->user_id == $user->id)
+      $event->delete();
+    else
+      return response()->json(array('success' => False));
+
+    return response()->json(array('success' => True));
+  }
+
   public function listEvents()
   {
     $events = array();
@@ -101,14 +123,15 @@ EOL;
     $eventList = array();
     foreach($events as $event) {
       // Get all event information as an array, and augment that
-      // array with the number of registered attendees, and if
-      // the current user is an attendee.
+      // array with the number of registered attendees, if
+      // the current user is an attendee, and if he created the event.
       $eventArray = $event->toarray();
       $eventArray['attendee_count'] =
         Attendee::where('event_id', '=', $event->id)->count();
       $eventArray['joined'] =
         Attendee::where('event_id', '=', $event->id)->
                   where('user_id', '=', $user->id)->count() > 0;
+      $eventArray['created'] = $event->user_id == $user->id;
 
       array_push($eventList, $eventArray);
     }

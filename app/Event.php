@@ -15,7 +15,7 @@ class Event extends Model {
 	 */
 	protected $table = 'events';
 
-  protected $fillable = array('title', 'description', 'location', 'time',
+  protected $fillable = array('user_id', 'title', 'description', 'location', 'time',
                               'photo_path', 'attendee_limit', 'category_id');
 
 }

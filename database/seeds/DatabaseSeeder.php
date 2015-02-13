@@ -76,6 +76,7 @@ class EventsSeeder extends Seeder {
   {
     DB::table('events')->truncate();
     Event::create(array(
+      'user_id' => 1,
       'category_id' => 1,
       'title' => 'HackU3',
       'description' => 'University hackathon event hosted by Dominion Enterprises.',
@@ -85,6 +86,7 @@ class EventsSeeder extends Seeder {
       'attendee_limit' => 60));
     
     Event::create(array(
+      'user_id' => 2,
       'category_id' => 2,
       'title' => 'ODU Hackathon',
       'description' => 'Hackathon hosted by Old Dominion University.',
@@ -94,6 +96,7 @@ class EventsSeeder extends Seeder {
       'attendee_limit' => 0));
 
     Event::create(array(
+      'user_id' => 3,
       'category_id' => 3,
       'title' => 'Pickup Basketball Game',
       'description' => 'Fun pickup game in the student b-ball courts.',
