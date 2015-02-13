@@ -1,5 +1,6 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Event;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
@@ -87,19 +88,7 @@ EOL;
       $events = Event::take(5)->get();
     }
     $jsonData = array();
-    $eventList = array();
-    foreach ($events as $event) {
-      array_push($eventList, array(
-	'id' => $event->id,      
-	'title' => $event->title,
-	'time' => $event->time,
-        'description' => $event->description,
-        'location' => $event->location,
-        'photo_path' => $event->photo_path,
-        'attendee_limit' => $event->attendee_limit,
-        'category_id' => $event->category_id
-      ));
-    }
+    $eventList = $events->toarray();
     $jsonData = array("success" => True, "events" => $eventList);
     return response()->json($jsonData);
   }

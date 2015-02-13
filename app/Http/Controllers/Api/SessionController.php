@@ -10,8 +10,8 @@ class SessionController extends Controller {
 
 	public function login()
 	{
-    		$email = Input::get('email');
-    		$password = Input::get('password');	
+    $email = Input::get('email');
+    $password = Input::get('password');	
 		$success = "False";
 		$user = new User();
 		
