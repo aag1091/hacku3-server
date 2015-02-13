@@ -4,6 +4,7 @@ use App\Http\Controllers\ApiController;
 use App\Event;
 use App\User;
 use App\Attendee;
+use App\Cred;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 
@@ -69,7 +70,12 @@ EOL;
 
   public function addEvent()
   {
+    $user = $this->currentUser();
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
     $event = new Event();
+    $event->user_id = $user->id;
     $event->title = Input::get('title');
     $event->description = Input::get('description');
     $event->location = Input::get('location');
@@ -78,6 +84,13 @@ EOL;
     $event->photo_path = '/tmp';
     $event->attendee_limit = Input::get('attendee_limit');
     $event->save();
+
+    Cred::create(array (
+      'user_id' => $user->id,
+      'event_id' => $event->id,
+      'cred' => 5));
+
+    return response()->json(array('success' => True));
   }
 
   public function removeEvent($id)
@@ -94,6 +107,9 @@ EOL;
       $event->delete();
     else
       return response()->json(array('success' => False));
+
+    Cred::where('user_id', '=', $user->id)->
+          where('event_id', '=', $user->id)->delete();
 
     return response()->json(array('success' => True));
   }

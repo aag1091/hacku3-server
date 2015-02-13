@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'CreateAttendeesTable' => $baseDir . '/database/migrations/2015_02_13_053211_create_attendees_table.php',
+    'CreateCredTable' => $baseDir . '/database/migrations/2015_02_13_165023_create_cred_table.php',
     'CreateEventCategoriesTable' => $baseDir . '/database/migrations/2015_02_12_215351_create_event_categories_table.php',
     'CreateEventsTable' => $baseDir . '/database/migrations/2015_02_12_182305_create_events_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
@@ -430,6 +431,7 @@ return array(
     'Symfony\\Component\\HttpFoundation\\Resources\\stubs\\FakeFile' => $vendorDir . '/symfony/http-foundation/Symfony/Component/HttpFoundation/Resources/stubs/FakeFile.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/Text/Template.php',
+    'UniversitiesSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'University' => $baseDir . '/database/migrations/2015_02_13_075706_University.php',
     'UsersSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
 );
