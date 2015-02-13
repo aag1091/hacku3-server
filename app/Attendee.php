@@ -15,6 +15,7 @@ class Attendee extends Model {
 	 */
 	protected $table = 'attendees';
 
-  protected $fillable = array('user_id', 'event_id');
+  protected $fillable = array('user_id', 'event_id', 'verified');
 
 }
+

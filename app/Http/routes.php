@@ -29,6 +29,8 @@ Route::group(['namespace' => 'Api'], function()
   Route::get('api/events/list', 'EventController@listEvents');
   Route::post('api/events/join/{id}', 'EventController@joinEvent');
   Route::post('api/events/unjoin/{id}', 'EventController@unjoinEvent');
+  Route::post('api/events/{id}/attendee/{attendee_id}/verify', 'EventController@verifyAttendee');
+  Route::post('api/events/{id}/attendee/{attendee_id}/unverify', 'EventController@unverifyAttendee');
 
   Route::post('api/login', 'SessionController@login');
   Route::post('api/logout', 'SessionController@logout');

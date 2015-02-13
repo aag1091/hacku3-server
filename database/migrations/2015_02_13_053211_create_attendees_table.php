@@ -17,6 +17,7 @@ class CreateAttendeesTable extends Migration {
 			$table->increments('id');
       $table->integer('user_id')->unsigned();
       $table->integer('event_id')->unsigned();
+      $table->boolean('verified');
 			$table->timestamps();
 		});
 	}
