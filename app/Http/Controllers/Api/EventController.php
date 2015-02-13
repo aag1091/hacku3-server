@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\User;
+use App\Attendee;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 
@@ -91,6 +93,27 @@ EOL;
     $jsonData = array();
     $eventList = $events->toarray();
     $jsonData = array("success" => True, "events" => $eventList);
+    return response()->json($jsonData);
+  }
+
+  public function joinEvent($id)
+  {
+    if (!Input::has('user_id'))
+      return response()->json(array('success' => False));
+    
+    $user = User::find(Input::get('user_id'));
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    $event = Event::find($id);
+    if ($event == NULL)
+      return response()->json(array('success' => False));
+
+    Attendee::create(array(
+      'user_id' => $user->id,
+      'event_id' => $event->id));
+
+    $jsonData = array('success' => True, 'name' => $user->name);
     return response()->json($jsonData);
   }
 }
