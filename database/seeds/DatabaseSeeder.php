@@ -105,5 +105,9 @@ class EventsSeeder extends Seeder {
 }
 
 class UniversitiesSeeder extends Seeder {
+
+  public function run()
+  {
     DB::table('universities')->truncate();
+  }
 }
