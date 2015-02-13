@@ -1,12 +1,14 @@
-<?php namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\ApiController;
+use App\Event;
 use App\User;
-use App\Http\Controllers\Controller;
+use App\Attendee;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use Auth;
 
-class SessionController extends Controller {
+class SessionController extends ApiController {
 
   public function login()
   {

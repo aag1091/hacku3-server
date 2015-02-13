@@ -1,13 +1,13 @@
 <?php namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ApiController;
 use App\Event;
 use App\User;
 use App\Attendee;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 
-class EventController extends Controller {
+class EventController extends ApiController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -82,13 +82,9 @@ EOL;
 
   public function removeEvent($id)
   {
-    if (!Input::has('user_id'))
-      return response()->json(array('success' => False));
-
-    $user = User::find(Input::get('user_id'));
+    $user = $this->currentUser();
     if ($user == NULL)
       return response()->json(array('success' => False));
-
     $event = Event::find($id);
     if ($event == NULL)
       return response()->json(array('success' => False));
@@ -106,10 +102,7 @@ EOL;
   {
     $events = array();
 
-    if (!Input::has('user_id'))
-      return response()->json(array('success' => False));
-
-    $user = User::find(Input::get('user_id'));
+    $user = $this->currentUser();
     if ($user == NULL)
       return response()->json(array('success' => False));
 
