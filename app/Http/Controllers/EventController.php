@@ -89,7 +89,8 @@ EOL;
     $jsonData = array();
     foreach ($events as $event) {
       array_push($jsonData, array(
-        'title' => $event->title,
+	'id' => $event->id,      
+	'title' => $event->title,
         'description' => $event->description,
         'location' => $event->location,
         'photo_path' => $event->photo_path,
