@@ -149,16 +149,44 @@ EOL;
     return response()->json($jsonData);
   }
 
+  public function badges()
+  {
+    return array(
+      'graduate' => '500',
+      'senior' => 300,
+      'junior' => 150,
+      'sophomore' => 50,
+      'freshman' => 10
+    );
+  }
+
   public function attendees($id)
   {
     $attendees = Attendee::where('event_id', '=', $id)->get(); 
     $users = $attendees->map(function($attendee)
     {
-      return User::find($attendee->user_id)->get();
+      $user = User::find($attendee->user_id);
+      $pointCount = Cred::where('user_id', '=', $user->id)->sum('cred');
+      $badges = $this->badges();
+      $user_level = 'freshman'; 
+      foreach($badges as $level => $levelPoint)
+      {
+        if($pointCount < $levelPoint)
+        {
+          $user_level = $level;
+        }
+      }
+       
+      return array(
+        'user' => $user->id,
+        'name' => $user->name,
+        'level' => $user_level
+      );
     });
     $jsonData = array("success" => True, "attendees" => $users);
     return response()->json($jsonData);
   }
+
 
   public function joinEvent($id)
   {
