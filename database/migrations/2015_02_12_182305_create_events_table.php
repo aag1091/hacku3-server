@@ -16,8 +16,7 @@ class CreateEventsTable extends Migration {
 		{
       $table->engine = 'InnoDB';
 			$table->increments('id');
-      //$table->integer('user_id')->unsigned();
-      //$table->foreign('user_id')->references('id')->on('users');
+      $table->integer('user_id')->unsigned();
       $table->unsignedInteger('category_id');
  			$table->string('title');
 			$table->string('description');
