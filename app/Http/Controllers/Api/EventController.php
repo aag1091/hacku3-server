@@ -109,7 +109,7 @@ EOL;
       return response()->json(array('success' => False));
 
     Cred::where('user_id', '=', $user->id)->
-          where('event_id', '=', $user->id)->delete();
+          where('event_id', '=', $id)->delete();
 
     return response()->json(array('success' => True));
   }
@@ -175,7 +175,8 @@ EOL;
 
     Attendee::create(array(
       'user_id' => $user->id,
-      'event_id' => $event->id));
+      'event_id' => $event->id,
+      'verified' => False));
 
     $jsonData = array('success' => True, 'name' => $user->name);
     return response()->json($jsonData);
@@ -192,6 +193,42 @@ EOL;
 
     Attendee::where('user_id', '=', $user->id)->
               where('event_id', '=', $id)->delete();
+
+    return response()->json(array('success' => True));
+  }
+
+  public function verifyAttendee($id, $attendee_id)
+  {
+    $user = $this->currentUser();
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    $updated = Attendee::where('user_id', '=', $attendee_id)->
+                         where('event_id', '=', $id)->update(array('verified' => True));
+    if (!$updated)
+      return response()->json(array('success' => False));
+
+    Cred::create(array (
+      'user_id' => $attendee_id,
+      'event_id' => $id,
+      'cred' => 1));
+
+    return response()->json(array('success' => True));
+  }
+
+  public function unverifyAttendee($id, $attendee_id)
+  {
+    $user = $this->currentUser();
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    $updated = Attendee::where('user_id', '=', $attendee_id)->
+                         where('event_id', '=', $id)->update(array('verified' => False));
+    if (!$updated)
+      return response()->json(array('success' => False));
+
+    Cred::where('user_id', '=', $attendee_id)->
+          where('event_id', '=', $id)->delete();
 
     return response()->json(array('success' => True));
   }

@@ -73,6 +73,22 @@ The following URLs can be used by 3rd party apps to access the data.
         * Data Type: Integer
         * Required: Yes
 * Returns: Success status
+
+**/api/events/{id}/attendee/{attendee_user_id}/verify
+* Request Method: POST
+* Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
+* Returns: Success status
+
+**/api/events/{id}/attendee/{attendee_user_id}/unverify
+* Request Method: POST
+* Parameters:
+    * user_id:
+        * Data Type: Integer
+        * Required: Yes
+* Returns: Success status
     
 **/api/user/events**
 * Request Method: GET
