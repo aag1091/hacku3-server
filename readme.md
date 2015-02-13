@@ -2,7 +2,7 @@
 
 The following URLs can be used by 3rd party apps to access the data.
 
-**/api/event/list**
+**/api/events/list**
 * Request Method: GET 
 * Parameters:
     * user_id:
@@ -23,7 +23,7 @@ The following URLs can be used by 3rd party apps to access the data.
         * Purpose: Limit the number of entries returned.
 * Returns: Success status; A JSON array of events in the database.
 
-**/api/event/add**
+**/api/events/add**
 * Request Method: POST
 * Parameters:
     * user_id:
@@ -50,7 +50,7 @@ The following URLs can be used by 3rd party apps to access the data.
         * Extra Note: When set to 0, it means there is no limit on attendees.
 * Returns: Success status
 
-**/api/event/remove/{id}**
+**/api/events/remove/{id}**
 * Request Method: DELETE
 * Parameters:
     * user_id:
@@ -58,7 +58,7 @@ The following URLs can be used by 3rd party apps to access the data.
         * Required: Yes
 * Returns: Success status
 
-**/api/event/join/{id}**
+**/api/events/join/{id}**
 * Request Method: POST
 * Parameters:
     * user_id:
@@ -66,7 +66,7 @@ The following URLs can be used by 3rd party apps to access the data.
         * Required: Yes
 * Returns: Success status
 
-**/api/event/unjoin/{id}**
+**/api/events/unjoin/{id}**
 * Request Method: POST
 * Parameters:
     * user_id:
