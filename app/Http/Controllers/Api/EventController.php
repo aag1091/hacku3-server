@@ -91,7 +91,17 @@ EOL;
       $events = Event::take(5)->get();
     }
     $jsonData = array();
-    $eventList = $events->toarray();
+    $eventList = array();
+    foreach($events as $event) {
+      // Get all event information as an array, and augment that
+      // array with the number of registered attendees.
+      $eventArray = $event->toarray();
+      $eventArray['attendee_count'] =
+        Attendee::where('event_id', '=', $event->id)->count();
+
+      array_push($eventList, $eventArray);
+    }
+
     $jsonData = array("success" => True, "events" => $eventList);
     return response()->json($jsonData);
   }
