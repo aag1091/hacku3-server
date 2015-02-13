@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Controller;
 use App\Event;
+use App\User;
+use App\Attendee;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 
@@ -89,8 +91,39 @@ EOL;
       $events = Event::take(5)->get();
     }
     $jsonData = array();
-    $eventList = $events->toarray();
+    $eventList = array();
+    foreach($events as $event) {
+      // Get all event information as an array, and augment that
+      // array with the number of registered attendees.
+      $eventArray = $event->toarray();
+      $eventArray['attendee_count'] =
+        Attendee::where('event_id', '=', $event->id)->count();
+
+      array_push($eventList, $eventArray);
+    }
+
     $jsonData = array("success" => True, "events" => $eventList);
+    return response()->json($jsonData);
+  }
+
+  public function joinEvent($id)
+  {
+    if (!Input::has('user_id'))
+      return response()->json(array('success' => False));
+    
+    $user = User::find(Input::get('user_id'));
+    if ($user == NULL)
+      return response()->json(array('success' => False));
+
+    $event = Event::find($id);
+    if ($event == NULL)
+      return response()->json(array('success' => False));
+
+    Attendee::create(array(
+      'user_id' => $user->id,
+      'event_id' => $event->id));
+
+    $jsonData = array('success' => True, 'name' => $user->name);
     return response()->json($jsonData);
   }
 }
